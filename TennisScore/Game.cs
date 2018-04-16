@@ -21,19 +21,24 @@ namespace TennisScore
         {
             if (isSameScore())
             {
-                if (isDeuce())
-                {
-                    return _Deuce;
-                }
-                else
-                {
-                    return SameScoreLookup();
-                }
+                return isDeuce() ? _Deuce : SameScoreLookup();
             }
             else
             {
-                return "Love All";
+                if (FirstPlayerScore > 3 || SecondPlayerScore > 3)
+                {
+                    return "";
+                }
+                else
+                {
+                    return LookupScore();
+                }
             }
+        }
+
+        private string LookupScore()
+        {
+            return $"{_scoreLookup[FirstPlayerScore]} {_scoreLookup[SecondPlayerScore]}";
         }
 
         private bool isDeuce()

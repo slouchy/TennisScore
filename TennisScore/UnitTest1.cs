@@ -20,35 +20,62 @@ namespace TennisScore
         public void Love_All()
         {
             GivenTennisGame(new Game { Id = gameId, FirstPlayerScore = 0, SecondPlayerScore = 0 });
-            scoreShouldBe("Love All");
+            ScoreShouldBe("Love All");
         }
 
         [TestMethod]
         public void Fifteen_All()
         {
             GivenTennisGame(new Game { Id = gameId, FirstPlayerScore = 1, SecondPlayerScore = 1 });
-            scoreShouldBe("Fifteen All");
+            ScoreShouldBe("Fifteen All");
         }
 
         [TestMethod]
         public void Thirty_All()
         {
             GivenTennisGame(new Game { Id = gameId, FirstPlayerScore = 2, SecondPlayerScore = 2 });
-            scoreShouldBe("Thirty All");
+            ScoreShouldBe("Thirty All");
         }
 
         [TestMethod]
         public void Deuce1()
         {
             GivenTennisGame(new Game { Id = gameId, FirstPlayerScore = 3, SecondPlayerScore = 3 });
-            scoreShouldBe("Deuce");
+            ScoreShouldBe("Deuce");
         }
 
         [TestMethod]
         public void Deuce2()
         {
             GivenTennisGame(new Game { Id = gameId, FirstPlayerScore = 8, SecondPlayerScore = 8 });
-            scoreShouldBe("Deuce");
+            ScoreShouldBe("Deuce");
+        }
+
+        [TestMethod]
+        public void Fifteen_Love()
+        {
+            GivenTennisGame(new Game { Id = gameId, FirstPlayerScore = 1, SecondPlayerScore = 0 });
+            ScoreShouldBe("Fifteen Love");
+        }
+        [TestMethod]
+        public void Thirty_Fifteen()
+        {
+            GivenTennisGame(new Game { Id = gameId, FirstPlayerScore = 2, SecondPlayerScore = 1 });
+            ScoreShouldBe("Thirty Fifteen");
+        }
+
+        [TestMethod]
+        public void Forty_Fifteen()
+        {
+            GivenTennisGame(new Game { Id = gameId, FirstPlayerScore = 3, SecondPlayerScore = 1 });
+            ScoreShouldBe("Forty Fifteen");
+        }
+
+        [TestMethod]
+        public void Fifteen_Forty()
+        {
+            GivenTennisGame(new Game { Id = gameId, FirstPlayerScore = 1, SecondPlayerScore = 3 });
+            ScoreShouldBe("Fifteen Forty");
         }
 
         private void GivenTennisGame(Game game)
@@ -60,7 +87,7 @@ namespace TennisScore
         {
             _TennisGame = new TennisGame(_repository);
         }
-        private void scoreShouldBe(string excepted)
+        private void ScoreShouldBe(string excepted)
         {
             Assert.AreEqual(excepted, _TennisGame.ScoreResult(gameId));
         }
