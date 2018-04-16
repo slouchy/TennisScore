@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TennisScore
 {
@@ -21,28 +22,31 @@ namespace TennisScore
 
         public string ScoreResult()
         {
-            if (isSameScore())
-            {
-                return isDeuce() ? _Deuce : SameScoreLookup();
-            }
-            else
-            {
-                if (isReadyForWin())
-                {
-                    return $"{AdvPlayer()} Adv";
-                }
-                else
-                {
-                    return LookupScore();
-                }
-            }
+            return isSameScore() ?
+                (isDeuce() ? _Deuce : SameScoreLookup()) :
+                (isReadyForWin() ? AdvOrWin() : LookupScore());
+        }
+
+        private string AdvOrWin()
+        {
+            return $"{AdvPlayer()} {AdvStatus()}";
+        }
+
+        private string AdvStatus()
+        {
+            return isAdv() ? "Adv" : "Win";
+        }
+
+        private bool isAdv()
+        {
+            return Math.Abs(FirstPlayerScore - SecondPlayerScore) == 1;
         }
 
         private string AdvPlayer()
         {
-            return FirstPlayerScore > SecondPlayerScore
-                ? FirstPlayerName
-                : SecondPlayerName;
+            return FirstPlayerScore > SecondPlayerScore ?
+                FirstPlayerName :
+                SecondPlayerName;
         }
 
         private bool isReadyForWin()

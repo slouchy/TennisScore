@@ -92,6 +92,20 @@ namespace TennisScore
             ScoreShouldBe("Tom Adv");
         }
 
+        [TestMethod]
+        public void FirstPlayer_Win()
+        {
+            GivenTennisGame(new Game { Id = gameId, FirstPlayerScore = 5, SecondPlayerScore = 3, FirstPlayerName = "Joey" });
+            ScoreShouldBe("Joey Win");
+        }
+
+        [TestMethod]
+        public void SecondPlayer_Win()
+        {
+            GivenTennisGame(new Game { Id = gameId, FirstPlayerScore = 2, SecondPlayerScore = 4, SecondPlayerName = "Tom" });
+            ScoreShouldBe("Tom Win");
+        }
+
         private void GivenTennisGame(Game game)
         {
             _repository.GetGame(gameId).Returns(game);
