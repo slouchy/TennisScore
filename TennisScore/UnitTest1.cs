@@ -78,6 +78,20 @@ namespace TennisScore
             ScoreShouldBe("Fifteen Forty");
         }
 
+        [TestMethod]
+        public void FirstPlayer_Advance()
+        {
+            GivenTennisGame(new Game { Id = gameId, FirstPlayerScore = 4, SecondPlayerScore = 3, FirstPlayerName = "Joey" });
+            ScoreShouldBe("Joey Adv");
+        }
+
+        [TestMethod]
+        public void SecondPlayer_Advance()
+        {
+            GivenTennisGame(new Game { Id = gameId, FirstPlayerScore = 3, SecondPlayerScore = 4, SecondPlayerName = "Tom" });
+            ScoreShouldBe("Tom Adv");
+        }
+
         private void GivenTennisGame(Game game)
         {
             _repository.GetGame(gameId).Returns(game);

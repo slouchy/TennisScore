@@ -6,6 +6,8 @@ namespace TennisScore
     {
         public int SecondPlayerScore { get; set; }
         public int FirstPlayerScore { get; set; }
+        public string FirstPlayerName { get; set; }
+        public string SecondPlayerName { get; set; }
         public int Id { get; set; }
 
         private static Dictionary<int, string> _scoreLookup = new Dictionary<int, string>()
@@ -25,15 +27,27 @@ namespace TennisScore
             }
             else
             {
-                if (FirstPlayerScore > 3 || SecondPlayerScore > 3)
+                if (isReadyForWin())
                 {
-                    return "";
+                    return $"{AdvPlayer()} Adv";
                 }
                 else
                 {
                     return LookupScore();
                 }
             }
+        }
+
+        private string AdvPlayer()
+        {
+            return FirstPlayerScore > SecondPlayerScore
+                ? FirstPlayerName
+                : SecondPlayerName;
+        }
+
+        private bool isReadyForWin()
+        {
+            return FirstPlayerScore > 3 || SecondPlayerScore > 3;
         }
 
         private string LookupScore()
@@ -53,7 +67,7 @@ namespace TennisScore
 
         private string SameScoreLookup()
         {
-            return _scoreLookup[FirstPlayerScore] + " All";
+            return $"{_scoreLookup[FirstPlayerScore]} All";
         }
     }
 }
