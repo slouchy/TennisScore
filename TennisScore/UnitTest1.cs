@@ -37,6 +37,20 @@ namespace TennisScore
             scoreShouldBe("Thirty All");
         }
 
+        [TestMethod]
+        public void Deuce1()
+        {
+            GivenTennisGame(new Game { Id = gameId, FirstPlayerScore = 3, SecondPlayerScore = 3 });
+            scoreShouldBe("Deuce");
+        }
+
+        [TestMethod]
+        public void Deuce2()
+        {
+            GivenTennisGame(new Game { Id = gameId, FirstPlayerScore = 8, SecondPlayerScore = 8 });
+            scoreShouldBe("Deuce");
+        }
+
         private void GivenTennisGame(Game game)
         {
             _repository.GetGame(gameId).Returns(game);

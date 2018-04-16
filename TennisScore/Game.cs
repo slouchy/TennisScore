@@ -15,17 +15,30 @@ namespace TennisScore
             { 2,"Thirty"},
             { 3,"Forty"}
         };
+        private string _Deuce = "Deuce";
 
         public string ScoreResult()
         {
             if (isSameScore())
             {
-                return SameScoreLookup();
+                if (isDeuce())
+                {
+                    return _Deuce;
+                }
+                else
+                {
+                    return SameScoreLookup();
+                }
             }
             else
             {
                 return "Love All";
             }
+        }
+
+        private bool isDeuce()
+        {
+            return FirstPlayerScore >= 3;
         }
 
         private bool isSameScore()
